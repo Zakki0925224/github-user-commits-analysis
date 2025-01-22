@@ -1,6 +1,7 @@
 import csv
 import os
 import requests
+import sys
 import git
 from typing import List
 
@@ -134,8 +135,24 @@ def generate_csv(username, author_filter: List[str] = []):
 
     print(f"Generated {CSV_FILE}!")
 
+def main():
+    args = sys.argv
+
+    if len(args) not in [2, 3]:
+        print("Usage: generate_csv.py <username> [author filter: <author1>,<author2>,...]")
+        return
+
+    username = args[1]
+    author_filter =[]
+
+    if len(args) == 3:
+        author_filter = list(filter(lambda x: x != "", args[2].split(",")))
+
+    print(f"username: {username}")
+    print(f"author_filter: {author_filter}")
+
+    download_bare_repos(username)
+    generate_csv(username, author_filter)
 
 if __name__ == "__main__":
-    username = "zakki0925224"
-    download_bare_repos(username)
-    generate_csv(username, ["Zakki0925224", "Zakki"])
+    main()
