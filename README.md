@@ -13,7 +13,7 @@ This script analyzes the commit history of a GitHub user's repositories and gene
    ```
 3. Run the script with the desired GitHub username:
    ```bash
-   python generate_csv.py
+   python generate_csv.py <username> [author filter: <author1>,<author2>,...]
    ```
 
 ## CSV Explanation
